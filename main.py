@@ -34,4 +34,4 @@ async def switch_source_to_plex():
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=9530, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=9530, reload=True)
