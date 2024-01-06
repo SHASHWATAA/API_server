@@ -16,7 +16,7 @@ async def turn_on_tv():
 
 
 @app.get("/home-assistant/turn-off-tv", status_code=200)
-async def turn_on_tv():
+async def turn_off_tv():
     tv_state = HomeAssistant.turn_off_tv(HomeAssistant.living_room_tv_entity_id, HomeAssistant.ha_authorization_headers)
     if tv_state != "off":
         raise HTTPException(status_code=424, detail="TV didn't turn off.")
@@ -32,6 +32,14 @@ async def switch_source_to_plex():
 
     return "plex turned on"
 
+
+@app.get("/home-assistant/movie-time")
+async def movie_time():
+    status = HomeAssistant.movie_time(HomeAssistant.living_room_tv_entity_id,headers=HomeAssistant.ha_authorization_headers)
+    if not status:
+        raise HTTPException(status_code=424, detail="TV didn't turn on or Plex coudn't open.")
+
+    return "plex turned on"
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=9530, reload=True)
