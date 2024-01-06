@@ -68,7 +68,6 @@ def turn_off_tv(entity_id, headers):
     return state
 
 
-
 def switch_tv_to_plex(entity_id):
     url_select_source = "https://ha.shash.win/api/services/media_player/select_source"
     data_select_source = {
@@ -78,12 +77,17 @@ def switch_tv_to_plex(entity_id):
     response_select_source = post(url_select_source, headers=ha_authorization_headers, json=data_select_source)
     return response_select_source.status_code
 
-if __name__ == '__main__':
 
-    state = turn_off_tv(living_room_tv_entity_id, ha_authorization_headers)
-    #
-    # # If the TV is on, change the source to Plex
-    # if state == "on":
-    #     switch_tv_to_plex(living_room_tv_entity_id)
-    # else:
-    #     print("The TV did not turn on within the specified time.")
+def movie_time(entity_id, headers):
+    state = turn_on_tv(entity_id, headers)
+    # If the TV is on, change the source to Plex
+    if state == "on":
+        switch_tv_to_plex(entity_id)
+        return True
+    else:
+        print("The TV did not turn on within the specified time.")
+        return False
+
+
+if __name__ == '__main__':
+    movie_time(living_room_tv_entity_id,ha_authorization_headers)
