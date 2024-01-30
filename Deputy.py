@@ -10,7 +10,7 @@ def start_shift():
 
     username = credentials.deputy_username
     password = credentials.deputy_password
-    # chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(options=chrome_options)
 
     driver.get("https://47825117100349.au.deputy.com")
@@ -23,7 +23,7 @@ def start_shift():
 
     driver.save_screenshot("homepage.png")
     driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[1]/div[2]').click()
-    driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[1]/div[2]/button[1]').click()
+    # driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[1]/div[2]/button[1]').click()
 
 
 if __name__ == '__main__':
