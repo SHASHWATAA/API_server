@@ -1,3 +1,5 @@
+import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
@@ -24,6 +26,8 @@ def start_shift():
     driver.save_screenshot("homepage.png")
     driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[1]/div[2]').click()
     # driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[1]/div[2]/button[1]').click()
+    time.sleep(5)
+    driver.quit()
 
 
 if __name__ == '__main__':
