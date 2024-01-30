@@ -1,6 +1,7 @@
 import uvicorn
 from fastapi import FastAPI, WebSocket, HTTPException
 import HomeAssistant
+import Deputy
 
 app = FastAPI()
 websocket_app = None
@@ -40,6 +41,16 @@ async def movie_time():
         raise HTTPException(status_code=424, detail="TV didn't turn on or Plex coudn't open.")
 
     return "plex turned on"
+
+
+@app.get("/deputy/start-shift")
+async def start_shift():
+    Deputy.start_shift()
+
+    return "shift started"
+
+
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=9530, reload=False)
