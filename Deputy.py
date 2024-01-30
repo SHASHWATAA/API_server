@@ -10,7 +10,7 @@ def start_shift():
 
     username = credentials.deputy_username
     password = credentials.deputy_password
-    # chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(options=chrome_options)
 
     driver.get("https://47825117100349.au.deputy.com")
