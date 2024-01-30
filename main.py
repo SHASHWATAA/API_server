@@ -36,7 +36,7 @@ async def switch_source_to_plex():
 
 @app.get("/home-assistant/movie-time")
 async def movie_time():
-    status = HomeAssistant.movie_time(HomeAssistant.living_room_tv_entity_id,headers=HomeAssistant.ha_authorization_headers)
+    status = HomeAssistant.movie_time(HomeAssistant.living_room_tv_entity_id, headers=HomeAssistant.ha_authorization_headers)
     if not status:
         raise HTTPException(status_code=424, detail="TV didn't turn on or Plex coudn't open.")
 
@@ -50,6 +50,11 @@ async def start_shift():
     return "shift started"
 
 
+@app.get("/deputy/end-shift/{end_time}")
+async def end_shift(end_time: str):
+    Deputy.end_shift(end_time)
+
+    return end_time
 
 
 if __name__ == "__main__":

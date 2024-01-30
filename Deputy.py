@@ -2,12 +2,13 @@ import time
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
 import credentials
 
 
-def start_shift():
+def login():
     chrome_options = Options()
 
     username = credentials.deputy_username
@@ -23,12 +24,30 @@ def start_shift():
     driver.find_element(By.ID, "password_ctl").send_keys(password)
     driver.find_element(By.ID, "btnLogin_ctl").click()
 
+    return driver
+
+
+def start_shift():
+    driver = login()
     driver.save_screenshot("homepage.png")
     driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[1]/div[2]').click()
-    # driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[1]/div[2]/button[1]').click()
     time.sleep(5)
     driver.quit()
 
 
+def end_shift(end_time):
+    driver = login()
+    driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[3]/div/div[2]/button').click()
+    time.sleep(1)
+    driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[2]/div/div[1]/div[3]/div/input').send_keys(Keys.COMMAND + "a")
+    driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[2]/div/div[1]/div[3]/div/input').send_keys(end_time)
+    driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[3]/button[3]').click()
+    time.sleep(5)
+    driver.save_screenshot("end_shift_modal.png")
+    driver.quit()
+
+    pass
+
+
 if __name__ == '__main__':
-    start_shift()
+    end_shift("05:19 PM")
