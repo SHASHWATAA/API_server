@@ -72,7 +72,7 @@ class CheckList(BaseModel):
     name: str
     description: str
     completed: bool
-    reward_type: str
+    reward_type: int
     tasks_list: List[Task]
 
 
