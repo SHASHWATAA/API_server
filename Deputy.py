@@ -39,7 +39,7 @@ def end_shift(end_time):
     driver = login()
     driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[3]/div/div[2]/button').click()
     time.sleep(1)
-    driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[2]/div/div[1]/div[3]/div/input').send_keys(Keys.COMMAND + "a")
+    driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[2]/div/div[1]/div[3]/div/input').send_keys(Keys.LEFT_CONTROL + "a")
     driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[2]/div/div[1]/div[3]/div/input').send_keys(end_time)
     driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[3]/button[3]').click()
     time.sleep(5)
