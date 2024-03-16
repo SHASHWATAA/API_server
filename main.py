@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI, WebSocket, HTTPException
 import HomeAssistant
 import Deputy
+import Hackathon
 
 app = FastAPI()
 websocket_app = None
@@ -58,14 +59,14 @@ async def end_shift(end_time: str):
     return end_time
 
 
-@app.get("/hackathon/{authentication_token}/{data}")
+@app.post("/hackathon/{authentication_token}/super-user/")
 async def dummy_data_print(authentication_token: str, data: str):
     if authentication_token == 'cu7igeg7cl':
         pass
     else:
         return "{error:authentication failed}"
 
-    print(data)
+    Hackathon.checklist_create(data)
 
 
 if __name__ == "__main__":
