@@ -11,8 +11,24 @@ from fastapi.staticfiles import StaticFiles
 from os import listdir, walk, path
 from os.path import isfile, join
 from typing import List
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+]
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,  # Allow credentials (e.g., cookies, authorization headers)
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all HTTP headers
+)
+
 websocket_app = None
 app.mount("/images/", StaticFiles(directory="images"), name="images")
 
