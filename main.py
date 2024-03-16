@@ -77,11 +77,11 @@ class CheckList(BaseModel):
 
 
 @app.post("/hackathon/{authentication_token}/super-user/")
-async def create_checklist(checklist: CheckList):
-    # if authentication_token == 'cu7igeg7cl':
-    #     pass
-    # else:
-    #     return "{error:authentication failed}"
+async def create_checklist(checklist: CheckList, authentication_token: str):
+    if authentication_token == 'cu7igeg7cl':
+        pass
+    else:
+        return "{error:authentication failed}"
 
     print(checklist)
 
