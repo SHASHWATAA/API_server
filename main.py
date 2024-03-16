@@ -14,7 +14,7 @@ from typing import List
 
 app = FastAPI()
 websocket_app = None
-app.mount("/images/", StaticFiles(directory="Images"), name="images")
+app.mount("/images/", StaticFiles(directory="images"), name="images")
 
 
 @app.get("/home-assistant/turn-on-tv", status_code=200)
@@ -135,9 +135,9 @@ def get_image_structure(directory: str) -> Dict[str, List[Dict[str, List[str]]]]
 
 @app.get("/images", response_model=Dict[str, List[Dict[str, List[str]]]])
 def list_image_structure():
-    image_dir = "Images"  # Path to your Hackathon directory
+    image_dir = "images"  # Path to your Hackathon directory
     image_structure = get_image_structure(image_dir)
-    return {"Images": [image_structure]}
+    return {"images": [image_structure]}
 
 
 if __name__ == "__main__":
