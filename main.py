@@ -85,10 +85,35 @@ async def create_checklist(checklist: CheckList, authentication_token: str):
 
     print(checklist)
 
-    return checklist
+    checklist_id = Hackathon.checklist_create(checklist)
 
-    # Hackathon.checklist_create(data)
+    checklist_data = Hackathon.retrieve_checklist_data(checklist_id)
 
+    return checklist_data
+
+
+@app.get("/hackathon/{authentication_token}/super-user/{id}")
+async def create_checklist(authentication_token: str, id: int):
+    if authentication_token == 'cu7igeg7cl':
+        pass
+    else:
+        return "{error:authentication failed}"
+
+    return Hackathon.retrieve_checklist_data(id)
+
+
+@app.put("/hackathon/{authentication_token}/super-user/{checklist_id}")
+async def update_checklist(checklist: CheckList, authentication_token: str, checklist_id: int):
+    if authentication_token == 'cu7igeg7cl':
+        pass
+    else:
+        return "{error:authentication failed}"
+
+    print(checklist)
+
+    checklist_data = Hackathon.update_checklist_data(checklist_id, checklist)
+
+    return checklist_data
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=9530, reload=True)
