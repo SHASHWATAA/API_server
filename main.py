@@ -1,3 +1,5 @@
+from typing import List
+
 import uvicorn
 from fastapi import FastAPI, WebSocket, HTTPException
 from pydantic import BaseModel
@@ -55,28 +57,38 @@ async def start_shift():
 
 @app.get("/deputy/end-shift/{end_time}")
 async def end_shift(end_time: str):
-
     Deputy.end_shift(end_time)
 
     return end_time
 
-class User(BaseModel):
-    user: str
+
+class Task(BaseModel):
+    name: str
+    description: str
+    completed: bool
+
+
+class CheckList(BaseModel):
+    name: str
+    description: str
+    completed: bool
+    reward_type: str
+    tasks: List[Task]
 
 
 @app.post("/hackathon/{authentication_token}/super-user/")
-async def dummy_data_print(authentication_token: str, user: User):
+async def create_checklist(checklist: CheckList):
     # if authentication_token == 'cu7igeg7cl':
     #     pass
     # else:
     #     return "{error:authentication failed}"
-    print(User)
-    return User
 
-    # return data
+    print(checklist)
+
+    return checklist
 
     # Hackathon.checklist_create(data)
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=9530, reload=False)
+    uvicorn.run("main:app", host="0.0.0.0", port=9530, reload=True)
