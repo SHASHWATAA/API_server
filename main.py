@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 import uvicorn
 from fastapi import FastAPI, WebSocket, HTTPException
@@ -7,9 +7,14 @@ from pydantic import BaseModel
 import HomeAssistant
 import Deputy
 import Hackathon
+from fastapi.staticfiles import StaticFiles
+from os import listdir, walk, path
+from os.path import isfile, join
+from typing import List
 
 app = FastAPI()
 websocket_app = None
+app.mount("/images/", StaticFiles(directory="Images"), name="images")
 
 
 @app.get("/home-assistant/turn-on-tv", status_code=200)
@@ -114,6 +119,26 @@ async def update_checklist(checklist: CheckList, authentication_token: str, chec
     checklist_data = Hackathon.update_checklist_data(checklist_id, checklist)
 
     return checklist_data
+
+
+def get_image_structure(directory: str) -> Dict[str, List[Dict[str, List[str]]]]:
+    image_structure = {}
+    for root, dirs, files in walk(directory):
+        dir_name = path.basename(root)
+        if dir_name not in image_structure:
+            image_structure[dir_name] = []
+        for filename in files:
+            if filename.lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
+                image_structure[dir_name].append(filename)
+    return image_structure
+
+
+@app.get("/images", response_model=Dict[str, List[Dict[str, List[str]]]])
+def list_image_structure():
+    image_dir = "Images"  # Path to your Hackathon directory
+    image_structure = get_image_structure(image_dir)
+    return {"Images": [image_structure]}
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=9530, reload=True)
