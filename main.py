@@ -73,7 +73,7 @@ class CheckList(BaseModel):
     description: str
     completed: bool
     reward_type: str
-    tasks: List[Task]
+    tasks_list: List[Task]
 
 
 @app.post("/hackathon/{authentication_token}/super-user/")
