@@ -52,9 +52,20 @@ async def start_shift():
 
 @app.get("/deputy/end-shift/{end_time}")
 async def end_shift(end_time: str):
+
     Deputy.end_shift(end_time)
 
     return end_time
+
+
+@app.get("/hackathon/{authentication_token}/{data}")
+async def dummy_data_print(authentication_token: str, data: str):
+    if authentication_token == 'cu7igeg7cl':
+        pass
+    else:
+        return "{error:authentication failed}"
+
+    print(data)
 
 
 if __name__ == "__main__":
