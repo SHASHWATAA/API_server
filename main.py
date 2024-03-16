@@ -1,5 +1,7 @@
 import uvicorn
 from fastapi import FastAPI, WebSocket, HTTPException
+from pydantic import BaseModel
+
 import HomeAssistant
 import Deputy
 import Hackathon
@@ -58,15 +60,18 @@ async def end_shift(end_time: str):
 
     return end_time
 
+class User(BaseModel):
+    user: str
+
 
 @app.post("/hackathon/{authentication_token}/super-user/")
-async def dummy_data_print(authentication_token: str, data: str):
+async def dummy_data_print(authentication_token: str, user: User):
     # if authentication_token == 'cu7igeg7cl':
     #     pass
     # else:
     #     return "{error:authentication failed}"
 
-    print(data)
+    print(User)
     # return data
 
     # Hackathon.checklist_create(data)
