@@ -66,6 +66,7 @@ async def dummy_data_print(authentication_token: str, data: str):
     else:
         return "{error:authentication failed}"
 
+    print(data)
     return data
 
     # Hackathon.checklist_create(data)
