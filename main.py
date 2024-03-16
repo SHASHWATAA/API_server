@@ -61,13 +61,13 @@ async def end_shift(end_time: str):
 
 @app.post("/hackathon/{authentication_token}/super-user/")
 async def dummy_data_print(authentication_token: str, data: str):
-    if authentication_token == 'cu7igeg7cl':
-        pass
-    else:
-        return "{error:authentication failed}"
+    # if authentication_token == 'cu7igeg7cl':
+    #     pass
+    # else:
+    #     return "{error:authentication failed}"
 
     print(data)
-    return data
+    # return data
 
     # Hackathon.checklist_create(data)
 
