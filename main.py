@@ -4,8 +4,10 @@ import uvicorn
 from fastapi import FastAPI, WebSocket, HTTPException
 import HomeAssistant
 import Deputy
+import discord_bot.FastAPI_user_routes
 
 app = FastAPI()
+app.include_router(discord_bot.FastAPI_user_routes.router)
 websocket_app = None
 
 
