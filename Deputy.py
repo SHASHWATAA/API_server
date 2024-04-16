@@ -50,4 +50,5 @@ def end_shift(end_time):
 
 
 if __name__ == '__main__':
-    end_shift("05:19 PM")
+    start_shift()
+    # end_shift("05:19 PM")
