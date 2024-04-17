@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
-
+import requests
 import credentials
 
 
@@ -28,23 +28,29 @@ def login():
 
 
 def start_shift():
-    driver = login()
-    driver.save_screenshot("homepage.png")
-    driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[1]/div[2]').click()
-    time.sleep(5)
-    driver.quit()
+    try:
+        driver = login()
+        driver.save_screenshot("homepage.png")
+        driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[1]/div[2]').click()
+        time.sleep(5)
+        driver.quit()
+    except Exception as e:
+        requests.get(f"http://api.shash.win/discord-bot/send-message?message=start shift failed {e}&channel_id=1187345577235730466")
 
 
 def end_shift(end_time):
-    driver = login()
-    driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[3]/div/div[2]/button').click()
-    time.sleep(1)
-    driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[2]/div/div[1]/div[3]/div/input').send_keys(Keys.LEFT_CONTROL + "a")
-    driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[2]/div/div[1]/div[3]/div/input').send_keys(end_time)
-    driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[3]/button[3]').click()
-    time.sleep(5)
-    driver.save_screenshot("end_shift_modal.png")
-    driver.quit()
+    try:
+        driver = login()
+        driver.find_element(By.XPATH, '//*[@id="js-MyWeek-PopupShift"]/div[3]/div[2]/div[3]/div/div[2]/button').click()
+        time.sleep(1)
+        driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[2]/div/div[1]/div[3]/div/input').send_keys(Keys.LEFT_CONTROL + "a")
+        driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[2]/div/div[1]/div[3]/div/input').send_keys(end_time)
+        driver.find_element(By.XPATH, '//*[@id="myweek-modal-endShift"]/div/div/div[3]/button[3]').click()
+        time.sleep(5)
+        driver.save_screenshot("end_shift_modal.png")
+        driver.quit()
+    except Exception as e:
+        requests.get(f"http://api.shash.win/discord-bot/send-message?message=end shift failed {e}&channel_id=1187345577235730466")
 
     pass
 
