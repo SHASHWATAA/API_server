@@ -5,9 +5,10 @@ from fastapi import FastAPI, WebSocket, HTTPException
 import HomeAssistant
 import Deputy
 import discord_bot.FastAPI_user_routes
-
+import invoice_generator.FastAPI_user_routes
 app = FastAPI()
 app.include_router(discord_bot.FastAPI_user_routes.router)
+app.include_router(invoice_generator.FastAPI_user_routes.router)
 websocket_app = None
 
 
@@ -59,7 +60,3 @@ async def end_shift(end_time: str):
     Deputy.end_shift(end_time)
 
     return end_time
-
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=9530, reload=True)
