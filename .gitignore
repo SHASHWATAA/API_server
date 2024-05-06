@@ -6,3 +6,6 @@ homepage.png
 *//.idea
 .idea/API_server.iml
 .idea/misc.xml
+/invoice_generator/Invoices/
+/.idea/inspectionProfiles/
+/pyvenv.cfg
