@@ -1,7 +1,4 @@
-from typing import List
-
-import uvicorn
-from fastapi import FastAPI, WebSocket, HTTPException
+from fastapi import FastAPI, HTTPException
 import HomeAssistant
 import Deputy
 import discord_bot.FastAPI_user_routes
