@@ -9,3 +9,8 @@ homepage.png
 /invoice_generator/Invoices/*
 /.idea/inspectionProfiles/
 /pyvenv.cfg
+.DS_Store
+__pycache__/
+discord_bot/__pycache__/
+invoice_generator/.DS_Store
+invoice_generator/__pycache__/
