@@ -116,11 +116,15 @@ def create_timesheet(employee_name, company, timesheet_data, rate):
 
     }
 
-    with open(f"invoice_generator/invoices/{datetime.now().strftime('%Y-%m-%d')} Invoice {company}.pdf", "wb") as f:
+    invoice_path = f"invoice_generator/invoices/{datetime.now().strftime('%Y-%m-%d')} Invoice {company}.pdf"
+
+    with open(invoice_path, "wb") as f:
         build_pdf(document, f)
 
     with open('invoice_generator/invoice_number.txt', 'w') as f:
         f.write(str(invoice_number + 1))
+
+    return invoice_path
 
 
 def process_data(data, days):
@@ -156,8 +160,10 @@ def main(canvas_days, cyrus_days):
     rate = 30
     # invoice_number = 541
 
-    create_timesheet("Shashwat Aryal", "Canvas", canvas_data, rate)
-    create_timesheet("Shashwat Aryal", "Cyrus", cyrus_data, rate)
+    canvas_invoice_path = create_timesheet("Shashwat Aryal", "Canvas", canvas_data, rate)
+    cyrus_invoice_path = create_timesheet("Shashwat Aryal", "Cyrus", cyrus_data, rate)
+
+    return [canvas_invoice_path, cyrus_invoice_path]
 
 
 if __name__ == '__main__':

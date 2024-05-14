@@ -50,8 +50,9 @@ class InvoiceGenerator:
                 # invoice_generate_url = "/invoice_generator/generate_invoice"
                 # print("sending_request to generate")
                 # print(requests.post(url + invoice_generate_url, params=payload))
-                pdf_generator.main(canvas_days, cyrus_days)
+                invoice_paths = pdf_generator.main(canvas_days, cyrus_days)
                 print("request to generate sent")
+                await send_images(invoice_paths, 1187345577235730466)
                 for item in self.children:
                     item.disabled = True
                 await interaction.message.edit(view=self)
