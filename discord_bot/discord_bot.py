@@ -4,7 +4,6 @@ from invoice_generator import pdf_generator
 import discord
 import requests
 from discord.ext import commands
-
 import credentials
 
 bot = discord.Bot()
@@ -52,7 +51,9 @@ class InvoiceGenerator:
                 # print(requests.post(url + invoice_generate_url, params=payload))
                 invoice_paths = pdf_generator.main(canvas_days, cyrus_days)
                 print("request to generate sent")
-                await send_images(invoice_paths, 1187345577235730466)
+                invoice_file_message  = await send_images(invoice_paths, 1187345577235730466)
+                await invoice_file_message.add_reaction("📧")
+
                 for item in self.children:
                     item.disabled = True
                 await interaction.message.edit(view=self)
@@ -132,7 +133,11 @@ async def send_images(image_paths: list, channel_id: int):
         filename = f"{image_path.split('/')[-1]}"  # Extract the filename from the path
         file = discord.File(image_path, filename=filename)
         files.append(file)
-    await channel.send(files=files)
+    message = await channel.send(files=files)
+
+    return message
+
+
 
 
 async def run():
