@@ -116,7 +116,7 @@ def create_timesheet(employee_name, company, timesheet_data, rate):
 
     }
 
-    invoice_path = f"invoice_generator/invoices/{datetime.now().strftime('%Y-%m-%d')} Invoice {company}.pdf"
+    invoice_path = f"invoice_generator/Invoices/{datetime.now().strftime('%Y-%m-%d')} Invoice {company}.pdf"
 
     with open(invoice_path, "wb") as f:
         build_pdf(document, f)
