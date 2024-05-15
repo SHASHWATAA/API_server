@@ -22,7 +22,9 @@ def using_selenium():
 
     driver.get("https://47825117100349.au.deputy.com/api/v1/my/timesheets/")
 
-    return driver.find_element(By.TAG_NAME, "body").text
+    timesheet_json = driver.find_element(By.TAG_NAME, "body").text
+    driver.close()
+    return timesheet_json
 
 
 if __name__ == '__main__':
