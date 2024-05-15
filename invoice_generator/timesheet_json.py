@@ -9,8 +9,8 @@ def using_selenium():
     username = "shashwat221@gmail.com"
     password = "Shashwat123"
     chrome_options.add_argument("--headless")
-    driver = Driver(uc=False, headed=True)
-    # driver = webdriver.Chrome(options=chrome_options)
+    #driver = Driver(uc=False, headed=True)
+    driver = webdriver.Chrome(options=chrome_options)
 
     driver.get("https://47825117100349.au.deputy.com")
     # driver.get("https://once.deputy.com/my/oauth/login?client_id=1b3cc57e2215a12579ec036f5884b049e61ef4d4&redirect_uri"
